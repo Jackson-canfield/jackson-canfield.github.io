@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
         <script async src="js/comeback.js"></script>
         <style>
             body {
@@ -8,7 +9,6 @@
                 color: rgb(45, 45, 45);
                 padding: 10px;
                 font-family: arial;
-                background-image: <script> async scr="assets/bg.png" </script>
             }
             #all-contents {
               max-width: 800px;
@@ -68,11 +68,23 @@
             h2, h3 {
                 margin: 0px;
             }
+            .clock {
+                color: white;
+                display: flex;
+            }
+            .clocktext {
+                color: white;
+                font-size: 22px;
+            }
+            #background {
+                background-image: url("https://images.pexels.com/photos/956999/milky-way-starry-sky-night-sky-star-956999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+            }
          </style>
     <title>
     </title>
     </head>
-    <body>
+    <body id="background">
+        
     <nav>
         <h1>Jackson's Wonderful Website</h1>
         <ul id="nav-ul">
@@ -111,5 +123,16 @@
             </p>
         </div>
     </main>
+    <main>
+        <div class="clock">
+            <p class="clocktext">The time is:  </p>
+            <div class="clock-container">
+                <h1 id="time-display"></h1>
+            </div>
+             <script async src="js/script.js"></script>
+        </div>
+    </main>
     </body>
+    <footer>
+    </footer>
 </html>
