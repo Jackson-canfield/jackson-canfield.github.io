@@ -18,5 +18,5 @@ window.addEventListener('focus', function() {
     setTimeout(function() {
         document.title = title;
     }, 2000);
-    document.title = '🙂 Welcome back!';
+    document.title = 'Welcome back!';
 });
