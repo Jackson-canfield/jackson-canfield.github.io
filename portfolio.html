@@ -53,6 +53,16 @@
                 flex: 1;
                 padding: 15px;
             }
+            .images-container {
+                display: flex;
+                justify-content: center;
+            }
+            .images-container img {
+                margin-left: 75;
+                margin-right: 75px;
+                max-width: 200px;
+                border-radius: 8px;
+            }
         </style>
         <title>Jackson's Wonderful Website </title>
     </head>
@@ -66,13 +76,18 @@
                 <a class="nav-a" href="index.html">Home</a>
                 </li>
                 <li class="nav-li">
-                <a class="nav-a" href="pages/portfolio.html">Portfolio</a>
+                <a class="nav-a" href="portfolio.html">Portfolio</a>
                 </li>
             </ul>
         </nav>
         <main>
             <div class="content">
                 <h1>Portfolio</h1>
+                <div class="images-container">
+                    <img src="https://bit.ly/3AhRrbE" alt="Image 1" href="projects/platformer/" target="_blank">
+                    <img src="https://bit.ly/3UWOx4i" alt="Image 2" href="projects/bouncing-box/" target="_blank">
+                    <img src="https://bit.ly/3TJM2kx" alt="Image 3" href="projects/circularity/" target="_blank">
+                </div>
                 <ul id="portfolio">
                     <li><a href="projects/platformer/">Platformer : A cannon - dodging, collectible - grabbing adventure game for Halleb0t</a></li>
                     <li><a href="projects/bouncing-box/">Bouncing Box : A project that gives you a taste of game development on the web </a></li>
