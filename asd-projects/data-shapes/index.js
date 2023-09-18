@@ -59,7 +59,9 @@ $(document).ready(function () {
   }
 
   // TODO 3-a: add a function that handles the static display type
-  
+  function handleStatic(data) {
+    
+  }
 
   // TODO 4-a: add a function that handles the good display type
   function handleGood(color, shape, repeat){
