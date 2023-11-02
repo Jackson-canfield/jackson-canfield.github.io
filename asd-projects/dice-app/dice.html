@@ -22,12 +22,13 @@
 <script>
     function makeDot(x, y) {
     $('<div>')
-    .css("height", 15)
-    .css("width", 15)
+    .css("height", 20)
+    .css("width", 20)
     .css("background-color", "black")
     .css("position", "absolute")
     .css('top', x - 10)
     .css('left', y - 10)
+    .css('border-radius', 20)
     .appendTo("#die");
 }
 function rollDie(dieID){
@@ -58,10 +59,18 @@ function rollDie(dieID){
         makeDot(75, 75, dieID); // bottom right
         makeDot(25, 25, dieID); // top left
         makeDot(25, 75, dieID); // bottom left
-        makeDot(75, 25, dieID); // top right
+        makeDot(75, 25, dieID); // top right'
+        
+    }
+    else if (randomNum === 6) {
+        makeDot(50, 100, dieID); // middle middle
+        makeDot(50, 0, dieID); // top right
+        makeDot(100, 100, dieID); // top left
+        makeDot(0, 0, dieID); // bottom right
+        makeDot(0, 100, dieID); // bottom left
+        makeDot(100, 0, dieID);
     }
 }
-
 $("#die").on("click", rollDie);
 
 </script>
