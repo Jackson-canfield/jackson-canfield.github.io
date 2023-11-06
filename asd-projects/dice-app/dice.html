@@ -12,6 +12,7 @@
             width: 100px;
             background-color: rgb(128, 42, 168); /* feel free to change this */
             position: relative;
+            border-radius: 20;
         }
     </style>
 
@@ -33,7 +34,7 @@
 }
 function rollDie(dieID){
     $('#die').empty();
-
+    //var randomNum = 6;
     var randomNum = Math.ceil(Math.random() * 6)
 
     if (randomNum === 1) {
@@ -63,12 +64,12 @@ function rollDie(dieID){
         
     }
     else if (randomNum === 6) {
-        makeDot(50, 100, dieID); // middle middle
-        makeDot(50, 0, dieID); // top right
-        makeDot(100, 100, dieID); // top left
-        makeDot(0, 0, dieID); // bottom right
-        makeDot(0, 100, dieID); // bottom left
-        makeDot(100, 0, dieID);
+        makeDot(20, 80, dieID); // top right
+        makeDot(50, 80, dieID); // middle right
+        makeDot(80, 80, dieID); // bottom right
+        makeDot(20, 15, dieID); // top right
+        makeDot(50, 15, dieID); //  middle left
+        makeDot(80, 15, dieID); // bottom left
     }
 }
 $("#die").on("click", rollDie);
