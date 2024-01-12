@@ -11,6 +11,15 @@ var highScoreElement = $("#highScore");
 
 // TODO 4a: Create the snake, apple and score variables
 // Game Variables
+var apple = {
+
+};
+
+var snake = {
+
+};
+
+var score = 0
 
 // Constant Variables
 var ROWS = 20;
@@ -41,8 +50,19 @@ init();
 
 function init() {
   // TODO 4b-2: initialize the apple
+  makeApple()
   // TODO 4c-2: initialize the snake
+
+  // initialize the snake's body as an empty Array
+  snake.body = [];
+
+  // make the first snakeSquare and set it as the head
+  makeSnakeSquare(10, 10);
+  snake.head = snake.body[0];
+
   // TODO 5a: Initialize the interval
+  // start update interval
+  updateInterval = setInterval(update, 100);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -55,6 +75,17 @@ function init() {
  */
 function update() {
   // TODO 5b: Fill in the update function's code block
+  function update() {
+    moveSnake();
+  
+    if (hasHitWall() || hasCollidedWithSnake()) {
+      endGame();
+    }
+  
+    if (hasCollidedWithApple()) {
+      handleAppleCollision();
+    }
+  }
 }
 
 function checkForNewDirection(event) {
@@ -131,6 +162,8 @@ function handleAppleCollision() {
   TODO 10: determine the location of the next snakeSquare based on the .row,
   .column and .direction properties of the snake.tail snakeSquare
   
+  
+
   HINT: snake.tail.direction will be either "left", "right", "up", or "down".
   If the tail is moving "left", place the next snakeSquare to its right. 
   If the tail is moving "down", place the next snakeSquare above it.
@@ -182,6 +215,23 @@ function endGame() {
  */
 function makeApple() {
   // TODO 4b-1: Fill in the makeApple() code block
+  /* Create an HTML element for the apple using jQuery. Then find a random
+ * position on the board that is not occupied and position the apple there.
+ */
+function makeApple() {
+  // make the apple jQuery Object and append it to the board
+  apple.element = $("<div>").addClass("apple").appendTo(board);
+
+  // get a random available row/column on the board
+  var randomPosition = getRandomAvailablePosition();
+
+  // initialize the row/column properties on the Apple Object
+  apple.row = randomPosition.row;
+  apple.column = randomPosition.column;
+
+  // position the apple on the screen
+  repositionSquare(apple);
+  }
 }
 
 /* Create an HTML element for a snakeSquare using jQuery. Then, given a row and
@@ -190,6 +240,29 @@ function makeApple() {
  */
 function makeSnakeSquare(row, column) {
   // TODO 4c-1: Fill in this function's code block
+  function makeSnakeSquare(row, column) {
+    // initialize a new snakeSquare Object
+    var snakeSquare = {};
+  
+    // make the snakeSquare.element Object and append it to the board
+    snakeSquare.element = $("<div>").addClass("snake").appendTo(board);
+  
+    // initialize the row and column properties on the snakeSquare Object
+    snakeSquare.row = row;
+    snakeSquare.column = column;
+  
+    // set the position of the snake on the screen
+    repositionSquare(snakeSquare);
+  
+    // if this is the head, add the snake-head id
+    if (snake.body.length === 0) {
+      snakeSquare.element.attr("id", "snake-head");
+    }
+  
+    // add snakeSquare to the end of the body Array and set it as the new tail
+    snake.body.push(snakeSquare);
+    snake.tail = snakeSquare;
+  }
 }
 
 /* 
