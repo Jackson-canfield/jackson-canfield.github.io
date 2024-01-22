@@ -11,16 +11,9 @@ var highScoreElement = $("#highScore");
 
 // TODO 4a: Create the snake, apple and score variables
 // Game Variables
-var apple = {
-
-};
-
-var snake = {
-
-};
-
-var score = 0
-
+var snake = {};
+var apple = {};
+var score = 0;
 // Constant Variables
 var ROWS = 20;
 var COLUMNS = 20;
@@ -49,16 +42,30 @@ $("body").on("keydown", handleKeyDown);
 init();
 
 function init() {
-  // TODO 4b-2: initialize the apple
-  makeApple()
   // TODO 4c-2: initialize the snake
-
   // initialize the snake's body as an empty Array
   snake.body = [];
 
   // make the first snakeSquare and set it as the head
   makeSnakeSquare(10, 10);
   snake.head = snake.body[0];
+  makeApple()
+  // TODO 4b-2: initialize the apple
+
+  function makeApple() {
+  // make the apple jQuery Object and append it to the board
+    apple.element = $("<div>").addClass("apple").appendTo(board);
+
+  // get a random available row/column on the board
+    var randomPosition = getRandomAvailablePosition();
+
+  // initialize the row/column properties on the Apple Object
+    apple.row = randomPosition.row;
+    apple.column = randomPosition.column;
+
+  // position the apple on the screen
+    repositionSquare(apple);
+  }
 
   // TODO 5a: Initialize the interval
   // start update interval
@@ -98,11 +105,17 @@ function checkForNewDirection(event) {
 
   if (activeKey === KEY.LEFT) {
     snake.head.direction = "left";
+  } else if (activeKey === KEY.RIGHT) {
+    snake.head.direction = "right";
+  } else if (activeKey === KEY.UP) {
+    snake.head.direction = "up";
+  } else if (activeKey === KEY.DOWN) {
+    snake.head.direction = "down";
   }
 
   // FILL IN THE REST
 
-  // console.log(snake.head.direction);     // uncomment me!
+  console.log(snake.head.direction);
 }
 
 function moveSnake() {
@@ -125,6 +138,19 @@ function moveSnake() {
   HINT: The snake's head will need to move forward 1 square based on the value
   of snake.head.direction which may be one of "left", "right", "up", or "down"
   */
+
+  if (snake.head.direction === "left") {
+    snake.head.column = snake.head.column - 1;
+  } else if (snake.head.direction === "right") {
+    snake.head.column = snake.head.column + 1;
+  } else if (snake.head.direction === "up") {
+    snake.head.column = snake.head.row - 1;
+  } else if (snake.head.direction === "down") {
+    snake.head.column = snake.head.row + 1;
+  }
+  repositionSquare(snake.head);
+
+
 }
 
 function hasHitWall() {
@@ -132,9 +158,12 @@ function hasHitWall() {
   TODO 8: Should return true if the snake's head has collided with the four walls of the
   board, false otherwise.
   
+  
+
   HINT: What will the row and column of the snake's head be if this were the case?
   */
 
+  
   return false;
 }
 
@@ -162,8 +191,6 @@ function handleAppleCollision() {
   TODO 10: determine the location of the next snakeSquare based on the .row,
   .column and .direction properties of the snake.tail snakeSquare
   
-  
-
   HINT: snake.tail.direction will be either "left", "right", "up", or "down".
   If the tail is moving "left", place the next snakeSquare to its right. 
   If the tail is moving "down", place the next snakeSquare above it.
@@ -215,23 +242,6 @@ function endGame() {
  */
 function makeApple() {
   // TODO 4b-1: Fill in the makeApple() code block
-  /* Create an HTML element for the apple using jQuery. Then find a random
- * position on the board that is not occupied and position the apple there.
- */
-function makeApple() {
-  // make the apple jQuery Object and append it to the board
-  apple.element = $("<div>").addClass("apple").appendTo(board);
-
-  // get a random available row/column on the board
-  var randomPosition = getRandomAvailablePosition();
-
-  // initialize the row/column properties on the Apple Object
-  apple.row = randomPosition.row;
-  apple.column = randomPosition.column;
-
-  // position the apple on the screen
-  repositionSquare(apple);
-  }
 }
 
 /* Create an HTML element for a snakeSquare using jQuery. Then, given a row and
@@ -278,7 +288,8 @@ function makeSnakeSquare(row, column) {
 */
 function handleKeyDown(event) {
   // TODO 6a: make the handleKeyDown function register which key is pressed
-  
+  activeKey = event.which;
+  console.log(activeKey);
 }
 
 /* Given a gameSquare (which may be a snakeSquare or the apple), position
