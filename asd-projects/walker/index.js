@@ -17,7 +17,8 @@ function runProgram(){
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   
   // Game Item Objects
-
+  var borderWidth = 400;
+  var borderHeight = 400;
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -33,8 +34,9 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    repositionGameItem()
-    redrawGameItem()
+    repositionGameItem();
+    redrawGameItem();
+    wallCollision();
   }
   var KEY = {
     UP: 38,
@@ -81,6 +83,25 @@ function runProgram(){
       console.log("Right Arrow Released");
     }
   }
+  function wallCollision(){
+    if(walker.positionX < 0){
+      walker.positionX = 0;
+      console.log("Border Hit");
+    }
+    if(walker.positionY < 0){
+      walker.positionY = 0;
+      console.log("Border Hit");
+    }
+    if(walker.positionX > borderWidth){
+      walker.positionX = borderWidth;
+      console.log("Border Hit");
+    }
+    if(walker.positionY > borderHeight){
+      walker.positionY = borderHeight;
+      console.log("Border Hit");
+    }
+  }
+
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -103,5 +124,4 @@ function runProgram(){
     // turn off event handlers
     $(document).off();
   }
-  
 }
